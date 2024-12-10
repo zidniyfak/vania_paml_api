@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:vania/vania.dart';
 import 'create_customers_table.dart';
 import 'create_orders_table.dart';
+import 'create_vendors_table.dart';
 
 void main(List<String> args) async {
   await MigrationConnection().setup();
@@ -16,12 +17,14 @@ void main(List<String> args) async {
 
 class Migrate {
   registry() async {
-		 await CreateCustomerTable().up();
-		 await CreateOrdersTable().up();
-	}
+    await CreateCustomerTable().up();
+    await CreateOrdersTable().up();
+    await CreateVendorsTable().up();
+  }
 
   dropTables() async {
-		 await CreateOrdersTable().down();
-		 await CreateCustomerTable().down();
-	 }
+    await CreateVendorsTable().down();
+    await CreateOrdersTable().down();
+    await CreateCustomerTable().down();
+  }
 }
