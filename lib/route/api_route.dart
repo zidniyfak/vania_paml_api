@@ -56,6 +56,6 @@ class ApiRoute implements Route {
       Router.post("/", productNoteController.store);
       Router.put('/{id}', productNoteController.update);
       Router.delete('/{id}', productNoteController.destroy);
-    }, prefix: "/products");
+    }, prefix: "/productsnotes");
   }
 }
