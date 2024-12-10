@@ -1,6 +1,7 @@
 import 'package:vania/vania.dart';
 import 'package:vania_paml_api/app/http/controllers/customer_controllers.dart';
 import 'package:vania_paml_api/app/http/controllers/home_controller.dart';
+import 'package:vania_paml_api/app/http/controllers/vendor_controllers.dart';
 import 'package:vania_paml_api/app/http/middleware/authenticate.dart';
 import 'package:vania_paml_api/app/http/middleware/home_middleware.dart';
 import 'package:vania_paml_api/app/http/middleware/error_response_middleware.dart';
@@ -33,5 +34,12 @@ class ApiRoute implements Route {
       Router.put('/{id}', customerController.update);
       Router.delete('/{id}', customerController.destroy);
     }, prefix: "/customers");
+
+    Router.group(() {
+      Router.get("/", vendorController.index);
+      Router.post("/", vendorController.store);
+      Router.put('/{id}', vendorController.update);
+      Router.delete('/{id}', vendorController.destroy);
+    }, prefix: "/vendors");
   }
 }
