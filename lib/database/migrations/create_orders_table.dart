@@ -5,11 +5,11 @@ class CreateOrdersTable extends Migration {
   Future<void> up() async {
     super.up();
     await createTableNotExists('orders', () {
-      integer('order_id', length: 11);
+      integer('order_num', length: 11);
       date('order_date');
       char('cust_id', length: 5);
 
-      primary('order_id');
+      primary('order_num');
       foreign('cust_id', 'customers', 'cust_id',
           constrained: true, onDelete: 'CASCADE');
     });
