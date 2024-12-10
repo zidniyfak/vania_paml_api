@@ -20,20 +20,20 @@ void main(List<String> args) async {
 
 class Migrate {
   registry() async {
-		 await CreateCustomerTable().up();
+    await CreateCustomerTable().up();
     await CreateOrdersTable().up();
     await CreateVendorsTable().up();
-		 await CreateProductsTable().up();
-		 await CreateProductnotesTable().up();
-		 await CreateOrderitemsTable().up();
-	}
+    await CreateProductsTable().up();
+    await CreateProductnotesTable().up();
+    await CreateOrderitemsTable().up();
+  }
 
   dropTables() async {
-		 await CreateOrderitemsTable().down();
-		 await CreateProductnotesTable().down();
-		 await CreateProductsTable().down();
-		 await CreateVendorsTable().down();
+    await CreateOrderitemsTable().down();
+    await CreateProductnotesTable().down();
+    await CreateProductsTable().down();
+    await CreateVendorsTable().down();
     await CreateOrdersTable().down();
     await CreateCustomerTable().down();
-	 }
+  }
 }
