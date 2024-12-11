@@ -1,7 +1,28 @@
+import 'dart:math';
+
 import 'package:vania/vania.dart';
 import 'package:vania_paml_api/app/models/customer.dart';
 
 class CustomerControllers extends Controller {
+  Future<String> _generateCustomerId() async {
+    var lastCust = await Customer().query().orderBy('cust_id', 'desc').first();
+
+    int lastId = 0;
+    if (lastCust != null) {
+      // Mengambil angka setelah 'C' dan mengonversinya ke integer
+      String lastIdStr = lastCust['cust_id'].toString().substring(1);
+      lastId = int.parse(
+          lastIdStr); // Pastikan lastId diupdate dengan nilai yang benar
+    }
+
+    int newId = lastId + 1;
+
+    // Membuat ID baru dengan format 'C0001', 'C0002', dll.
+    String newIdStr = 'C${newId.toString().padLeft(4, '0')}';
+
+    return newIdStr;
+  }
+
   Future<Response> index() async {
     try {
       var customers = await Customer().query().get();
@@ -25,7 +46,10 @@ class CustomerControllers extends Controller {
       var custCountry = request.input('cust_country');
       var custTelp = request.input('cust_telp');
 
+      var custId = await _generateCustomerId();
+
       await Customer().query().insert({
+        'cust_id': custId,
         'cust_name': custName,
         'cust_address': custAddress,
         'cust_city': custCity,

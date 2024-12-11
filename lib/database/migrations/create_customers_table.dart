@@ -5,7 +5,7 @@ class CreateCustomerTable extends Migration {
   Future<void> up() async {
     super.up();
     await createTableNotExists('customers', () {
-      id();
+      char('cust_id');
       string('cust_name', length: 50);
       string('cust_address', length: 50);
       string('cust_city', length: 20);
@@ -14,6 +14,8 @@ class CreateCustomerTable extends Migration {
       string('cust_country', length: 25);
       string('cust_telp', length: 15);
       timeStamps();
+
+      primary('cust_id');
     });
   }
 
