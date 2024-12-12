@@ -2,6 +2,20 @@ import 'package:vania/vania.dart';
 import 'package:vania_paml_api/app/models/vendor.dart';
 
 class VendorControllers extends Controller {
+  Future<String> _generateVendorId() async {
+    var lastVend = await Vendor().query().orderBy('vend_id', 'desc').first();
+
+    int lastId = 0;
+    if (lastVend != null) {
+      String lastIdStr = lastVend['vend_id'].toString().substring(1);
+      lastId = int.parse(lastIdStr);
+    }
+
+    int newId = lastId + 1;
+    String newIdStr = 'V${newId.toString().padLeft(4, '0')}';
+    return newIdStr;
+  }
+
   Future<Response> index() async {
     try {
       var vendors = await Vendor().query().get();
@@ -9,10 +23,6 @@ class VendorControllers extends Controller {
     } catch (e) {
       return Response.json({'message': e.toString()});
     }
-  }
-
-  Future<Response> create() async {
-    return Response.json({});
   }
 
   Future<Response> store(Request request) async {
@@ -24,7 +34,10 @@ class VendorControllers extends Controller {
       var vendZip = request.input('vend_zip');
       var vendCountry = request.input('vend_country');
 
+      var vendId = await _generateVendorId();
+
       await Vendor().query().insert({
+        'vend_id': vendId,
         'vend_name': vendName,
         'vend_address': vendAddress,
         'vend_kota': vendKota,
@@ -38,6 +51,15 @@ class VendorControllers extends Controller {
         'success': true,
         'message': 'Data berhasil disimpan',
         'code': 200,
+        'data': {
+          'vend_id': vendId,
+          'vend_name': vendName,
+          'vend_address': vendAddress,
+          'vend_kota': vendKota,
+          'vend_state': vendState,
+          'vend_zip': vendZip,
+          'vend_country': vendCountry,
+        }
       });
     } catch (e) {
       return Response.json({
@@ -48,15 +70,7 @@ class VendorControllers extends Controller {
     }
   }
 
-  Future<Response> show(int id) async {
-    return Response.json({});
-  }
-
-  Future<Response> edit(int id) async {
-    return Response.json({});
-  }
-
-  Future<Response> update(Request request, int id) async {
+  Future<Response> update(Request request, String vendId) async {
     try {
       var vendName = request.input('vend_name');
       var vendAddress = request.input('vend_address');
@@ -65,7 +79,7 @@ class VendorControllers extends Controller {
       var vendZip = request.input('vend_zip');
       var vendCountry = request.input('vend_country');
 
-      await Vendor().query().where('id', '=', id).update({
+      await Vendor().query().where('vend_id', '=', vendId).update({
         'vend_name': vendName,
         'vend_address': vendAddress,
         'vend_kota': vendKota,
@@ -79,6 +93,15 @@ class VendorControllers extends Controller {
         'success': true,
         'message': 'Data berhasil diupdate',
         'code': 200,
+        'data': {
+          'vend_id': vendId,
+          'vend_name': vendName,
+          'vend_address': vendAddress,
+          'vend_kota': vendKota,
+          'vend_state': vendState,
+          'vend_zip': vendZip,
+          'vend_country': vendCountry,
+        }
       });
     } catch (e) {
       return Response.json({
@@ -89,9 +112,9 @@ class VendorControllers extends Controller {
     }
   }
 
-  Future<Response> destroy(int id) async {
+  Future<Response> destroy(String vendId) async {
     try {
-      await Vendor().query().where('id', '=', id).delete();
+      await Vendor().query().where('vend_id', '=', vendId).delete();
       return Response.json({
         'success': true,
         'message': 'Data berhasil dihapus',

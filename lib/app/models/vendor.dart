@@ -1,9 +1,7 @@
 import 'package:vania/vania.dart';
 
-class Vendor extends Model{
-    
-  Vendor(){
+class Vendor extends Model {
+  Vendor() {
     super.table('vendors');
   }
-
 }

@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:vania/vania.dart';
 import 'package:vania_paml_api/app/models/customer.dart';
 
@@ -9,15 +7,12 @@ class CustomerControllers extends Controller {
 
     int lastId = 0;
     if (lastCust != null) {
-      // Mengambil angka setelah 'C' dan mengonversinya ke integer
       String lastIdStr = lastCust['cust_id'].toString().substring(1);
-      lastId = int.parse(
-          lastIdStr); // Pastikan lastId diupdate dengan nilai yang benar
+      lastId = int.parse(lastIdStr);
     }
 
     int newId = lastId + 1;
 
-    // Membuat ID baru dengan format 'C0001', 'C0002', dll.
     String newIdStr = 'C${newId.toString().padLeft(4, '0')}';
 
     return newIdStr;
@@ -32,12 +27,9 @@ class CustomerControllers extends Controller {
     }
   }
 
-  Future<Response> create() async {
-    return Response.json({});
-  }
-
   Future<Response> store(Request request) async {
     try {
+      var custId = await _generateCustomerId();
       var custName = request.input('cust_name');
       var custAddress = request.input('cust_address');
       var custCity = request.input('cust_city');
@@ -45,8 +37,6 @@ class CustomerControllers extends Controller {
       var custZip = request.input('cust_zip');
       var custCountry = request.input('cust_country');
       var custTelp = request.input('cust_telp');
-
-      var custId = await _generateCustomerId();
 
       await Customer().query().insert({
         'cust_id': custId,
@@ -63,8 +53,18 @@ class CustomerControllers extends Controller {
 
       return Response.json({
         'success': true,
-        'message': 'Data berhasil disimpan',
+        'message': 'Data customer berhasil disimpan',
         'code': 200,
+        'data': {
+          'cust_id': custId,
+          'cust_name': custName,
+          'cust_address': custAddress,
+          'cust_city': custCity,
+          'cust_state': custState,
+          'cust_zip': custZip,
+          'cust_country': custCountry,
+          'cust_telp': custTelp,
+        }
       });
     } catch (e) {
       return Response.json({
@@ -75,15 +75,7 @@ class CustomerControllers extends Controller {
     }
   }
 
-  Future<Response> show(int id) async {
-    return Response.json({});
-  }
-
-  Future<Response> edit(int id) async {
-    return Response.json({});
-  }
-
-  Future<Response> update(Request request, int id) async {
+  Future<Response> update(Request request, String custId) async {
     try {
       var custName = request.input('cust_name');
       var custAddress = request.input('cust_address');
@@ -93,7 +85,7 @@ class CustomerControllers extends Controller {
       var custCountry = request.input('cust_country');
       var custTelp = request.input('cust_telp');
 
-      await Customer().query().where('id', '=', id).update({
+      await Customer().query().where('cust_id', '=', custId).update({
         'cust_name': custName,
         'cust_address': custAddress,
         'cust_city': custCity,
@@ -105,8 +97,18 @@ class CustomerControllers extends Controller {
       });
       return Response.json({
         'success': true,
-        'message': 'Data berhasil diupdate',
+        'message': 'Data customer berhasil diupdate',
         'code': 200,
+        'data': {
+          'cust_id': custId,
+          'cust_name': custName,
+          'cust_address': custAddress,
+          'cust_city': custCity,
+          'cust_state': custState,
+          'cust_zip': custZip,
+          'cust_country': custCountry,
+          'cust_telp': custTelp,
+        }
       });
     } catch (e) {
       return Response.json({
@@ -117,9 +119,9 @@ class CustomerControllers extends Controller {
     }
   }
 
-  Future<Response> destroy(int id) async {
+  Future<Response> destroy(String custId) async {
     try {
-      await Customer().query().where('id', '=', id).delete();
+      await Customer().query().where('cust_id', '=', custId).delete();
       return Response.json({
         'success': true,
         'message': 'Data berhasil dihapus',

@@ -29,11 +29,11 @@ class Migrate {
   }
 
   dropTables() async {
+    await CreateCustomerTable().down();
     await CreateOrderitemsTable().down();
     await CreateProductnotesTable().down();
     await CreateProductsTable().down();
     await CreateVendorsTable().down();
     await CreateOrdersTable().down();
-    await CreateCustomerTable().down();
   }
 }

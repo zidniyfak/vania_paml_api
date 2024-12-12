@@ -5,16 +5,17 @@ class CreateOrderitemsTable extends Migration {
   Future<void> up() async {
     super.up();
     await createTableNotExists('orderitems', () {
-      id();
-      bigInt('order_num', unsigned: true);
-      bigInt('prod_id', unsigned: true);
+      bigInt('order_item', length: 11);
+      bigInt('order_num', length: 11);
+      string('prod_id', length: 10);
       integer('quantity', length: 11);
       integer('size', length: 11);
       timeStamps();
 
-      foreign('order_num', 'orders', 'id',
+      primary('order_item');
+      foreign('order_num', 'orders', 'order_num',
           constrained: true, onDelete: 'CASCADE');
-      foreign('prod_id', 'products', 'id',
+      foreign('prod_id', 'products', 'prod_id',
           constrained: true, onDelete: 'CASCADE');
     });
   }

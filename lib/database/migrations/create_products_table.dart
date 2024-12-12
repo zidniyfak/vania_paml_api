@@ -5,14 +5,15 @@ class CreateProductsTable extends Migration {
   Future<void> up() async {
     super.up();
     await createTableNotExists('products', () {
-      id();
-      bigInt('vend_id', unsigned: true);
+      string('prod_id', length: 10);
+      char('vend_id', length: 5);
       string('prod_name', length: 25);
       integer('prod_price', length: 11);
       text('prod_desc');
       timeStamps();
 
-      foreign('vend_id', 'vendors', 'id',
+      primary('prod_id');
+      foreign('vend_id', 'vendors', 'vend_id',
           constrained: true, onDelete: 'CASCADE');
     });
   }

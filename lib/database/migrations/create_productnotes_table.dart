@@ -5,13 +5,14 @@ class CreateProductnotesTable extends Migration {
   Future<void> up() async {
     super.up();
     await createTableNotExists('productnotes', () {
-      id();
-      bigInt('prod_id', unsigned: true);
+      char('note_id', length: 5);
+      string('prod_id', length: 10);
       date('note_date');
       text('note_text');
       timeStamps();
 
-      foreign('prod_id', 'products', 'id',
+      primary('note_id');
+      foreign('prod_id', 'products', 'prod_id',
           constrained: true, onDelete: 'CASCADE');
     });
   }
