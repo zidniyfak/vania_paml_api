@@ -11,7 +11,7 @@ CUSTOMERS
 3. Update
 ![](./screenshoot/customers/customers_create.png)
 4. Delete
-![](./screenshoot/customers/customers_delete.png)
+![](./screenshoot/customers/customer_delete.png)
 
 VENDORS
 1. Create
@@ -25,31 +25,37 @@ VENDORS
 
 PRODUCTS
 1. Create
-![](./screenshoot/customers_vendors.png)
+![](./screenshoot/products/products_create.png)
 2. Read
-![](./screenshoot/customers_read.png)
+![](./screenshoot/products/products_read.png)
 3. Update
-![](./screenshoot/customers_create.png)
+![](./screenshoot/products/products_update.png)
 4. Delete
-![](./screenshoot/customers_delete.png)
+![](./screenshoot/products/products_delete.png)
 
-VENDORS
+PRODUCTNOTES
 1. Create
-![](./screenshoot/customers_vendors.png)
+![](./screenshoot/productnotes/productnotes_create.png)
 2. Read
-![](./screenshoot/customers_read.png)
+![](./screenshoot/productnotes/productnotes_read.png)
 3. Update
-![](./screenshoot/customers_create.png)
+![](./screenshoot/productnotes/productnotes_update.png)
 4. Delete
-![](./screenshoot/customers_delete.png)
-VENDORS
-1. Create
-![](./screenshoot/customers_vendors.png)
-2. Read
-![](./screenshoot/customers_read.png)
-3. Update
-![](./screenshoot/customers_create.png)
-4. Delete
-![](./screenshoot/customers_delete.png)
+![](./screenshoot/productnotes/productnotes_delete.png)
 
+ORDERS
+1. Create
+![](./screenshoot/orders/orders_create.png)
+2. Read
+![](./screenshoot/orders/orders_read.png)
+4. Delete
+![](./screenshoot/orders/orders_delete.png)
+
+AUTH
+1. Login
+![](./screenshoot/auth/auth_login.png)
+2. Register
+![](./screenshoot/auth/auth_register.png)
+3. Logout
+![](./screenshoot/auth/auth_logout.png)
 
