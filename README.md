@@ -1,10 +1,11 @@
 
 # TUGAS PAML - VANIA REST API
 
-NAMA : ZIDNIY FARIH AL KAUSAR
-NIM  : 5210411096
+<h4>NAMA : ZIDNIY FARIH AL KAUSAR</h4>
+<h4>NIM : 5210411096</h4>
 
-CUSTOMERS
+
+<b>CUSTOMERS</b>
 1. Create
 ![](./screenshoot/customers/customers_create.png)
 2. Read
@@ -14,7 +15,7 @@ CUSTOMERS
 4. Delete
 ![](./screenshoot/customers/customer_delete.png)
 
-VENDORS
+<b>VENDORS</b>
 1. Create
 ![](./screenshoot/vendors/vendors_create.png)
 2. Read
@@ -24,7 +25,7 @@ VENDORS
 4. Delete
 ![](./screenshoot/vendors/vendors_delete.png)
 
-PRODUCTS
+<b>PRODUCTS</b>
 1. Create
 ![](./screenshoot/products/products_create.png)
 2. Read
@@ -34,7 +35,7 @@ PRODUCTS
 4. Delete
 ![](./screenshoot/products/products_delete.png)
 
-PRODUCTNOTES
+<b>PRODUCTNOTES</b>
 1. Create
 ![](./screenshoot/productnotes/productnotes_create.png)
 2. Read
@@ -44,7 +45,7 @@ PRODUCTNOTES
 4. Delete
 ![](./screenshoot/productnotes/productnotes_delete.png)
 
-ORDERS
+<b>ORDERS</b>
 1. Create
 ![](./screenshoot/orders/orders_create.png)
 2. Read
@@ -52,7 +53,7 @@ ORDERS
 4. Delete
 ![](./screenshoot/orders/orders_delete.png)
 
-AUTH
+<b>AUTH</b>
 1. Login
 ![](./screenshoot/auth/auth_login.png)
 2. Register
